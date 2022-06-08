@@ -1,0 +1,25 @@
+version: "3"
+services:
+  backend1:
+    build: 
+      context: .
+      dockerfile: Dockerfile 
+    volumes: 
+      - .:/app
+    ports:
+      - "20002:20002"
+    depends_on: 
+      - db1
+
+  db1:
+    image: mysql:5.7.22
+    restart: always
+    environment:
+      MYSQL_DATABASE: admin
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root 
+    volumes: 
+      - .dbdata:/var/lib/mysql
+    ports:
+      - "30003:3306"
